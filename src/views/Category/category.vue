@@ -1,15 +1,165 @@
 <template>
-  <div>
-    <h2>分类</h2>
+  <div class="wrapper" ref="a">
+      <div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+    <div>a</div>
+      </div>
   </div>
 </template>
 
 <script>
+import BScroll from 'better-scroll'
 export default {
+  name:"category",
+  mounted(){
+    this.bs = new BScroll(this.$refs.a,{
 
+    })
+  },
+  data(){
+    return{
+      bs:null
+    }
+  }
 }
 </script>
 
 <style>
-
+.wrapper{
+  height: 150px;
+  background-color: red;
+  overflow: hidden;
+  /* overflow-y: scroll; */
+}
 </style>

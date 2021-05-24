@@ -3,8 +3,8 @@
     <nav-bar class="home-bar">
       <div slot="center">购物街</div>
     </nav-bar>
-
-    <home-swiper :banner="banner" />
+    <scroll class="content">
+      <home-swiper :banner="banner" />
     <!-- <div>
      <el-carousel >
       <el-carousel-item v-for="item in banner" :key="item.link">
@@ -14,56 +14,14 @@
       </el-carousel-item>
      </el-carousel>
     </div> -->
-    <recommend-view :recommend="recommend" />
-    <feature-view />
-    <tab-control :titles="['流行','新款','精选']"/>
-    <goods-list :goods="goods['pop'].list" />
+      <recommend-view :recommend="recommend" />
+      <feature-view />
+      <tab-control @tabClick="tabClick" :titles="['流行','新款','精选']"/>
+      <goods-list :goods="showGoods" />
+    </scroll>
+    
 
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
-    <div>a</div>
+
   </div>
 </template>
 
@@ -77,6 +35,7 @@ import TabControl from './ChildComps/TabControl'
 import GoodsList from 'components/context/goods/GoodsList'
 
 import NavBar from 'components/common/navbar/NavBar'
+import Scroll from 'components/common/scroll/Scroll'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 
@@ -91,7 +50,8 @@ export default {
     FeatureView,
     TabControl,
     getHomeGoods,
-    GoodsList
+    GoodsList,
+    Scroll
   },
   data(){
     return {
@@ -101,20 +61,37 @@ export default {
          'pop': {page: 0, list:[]},
          'new': {page: 0, list:[]},
          'sell': {page: 0, list:[]}
-      }
+      },
+      current:'pop'
+    }
+  },
+  computed:{
+    showGoods(){
+      return this.goods[this.current].list
     }
   },
   created(){
-    getHomeMultidata().then(res => {
-      console.log(res)
-      this.banner = res.data.banner.list
-      this.recommend = res.data.recommend.list
-    })
+    this.getHomeMultidata()
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
   methods:{
+    tabClick(index){
+      switch(index){
+        case 0:
+          this.current='pop'
+          break;
+        case 1:
+          this.current='new'
+          break;
+        case 2:
+          this.current='sell'
+          break;
+      }
+    },
+
+
     getHomeGoods(type){
       const page=this.goods[type].page+1
       getHomeGoods(type,page).then(res=>{
@@ -122,14 +99,23 @@ export default {
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page++
       })
+    },
+    getHomeMultidata(){
+      getHomeMultidata().then(res => {
+      console.log(res)
+      this.banner = res.data.banner.list
+      this.recommend = res.data.recommend.list
+    })
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 #home{
-  padding-top: 44px;
+ padding-top: 44px;
+ height: 100vh;
+ position: relative;
 }
 .home-bar{
   position: fixed;
@@ -140,5 +126,12 @@ export default {
   background-color: var(--color-tint);
   color: white;
 }
-
+.content{
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  right: 0;
+  left: 0;
+}
 </style>
