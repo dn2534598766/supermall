@@ -29,9 +29,11 @@ export default {
 <style>
 .goods-item{
     width: 48%;
+    padding-bottom: 10px;
 }
 .goods-item img{
     width: 100%;
+    border-radius: 5px;
 }
 .title{
     overflow: hidden;

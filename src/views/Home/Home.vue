@@ -3,7 +3,12 @@
     <nav-bar class="home-bar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="content">
+    <scroll class="content"
+     ref="scroll" 
+     :probe-type="3" 
+     :pull-up-load="true"
+     @scroll="contentPosition"
+     @pullingUp="loadMore">
       <home-swiper :banner="banner" />
     <!-- <div>
      <el-carousel >
@@ -19,7 +24,7 @@
       <tab-control @tabClick="tabClick" :titles="['流行','新款','精选']"/>
       <goods-list :goods="showGoods" />
     </scroll>
-    
+    <back-top @click.native="top" v-show="isShow" />
 
 
   </div>
@@ -33,6 +38,7 @@ import FeatureView from './ChildComps/FeatureView'
 import TabControl from './ChildComps/TabControl'
 
 import GoodsList from 'components/context/goods/GoodsList'
+import BackTop from 'components/context/backTop/BackTop'
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
@@ -51,7 +57,8 @@ export default {
     TabControl,
     getHomeGoods,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data(){
     return {
@@ -62,7 +69,8 @@ export default {
          'new': {page: 0, list:[]},
          'sell': {page: 0, list:[]}
       },
-      current:'pop'
+      current:'pop',
+      isShow:false
     }
   },
   computed:{
@@ -90,6 +98,17 @@ export default {
           break;
       }
     },
+    top(){
+      this.$refs.scroll.Scroll(0,0,500)
+    },
+    contentPosition(position){
+      console.log(position)
+      this.isShow = -position.y >1000
+    },
+    loadMore(){
+      this.getHomeGoods(this.current)
+      
+    },
 
 
     getHomeGoods(type){
@@ -98,6 +117,8 @@ export default {
         console.log(res)
         this.goods[type].list.push(...res.data.list)
         this.goods[type].page++
+        this.$refs.scroll.finishPullUp()
+        this.$refs.scroll.scroll.refresh()
       })
     },
     getHomeMultidata(){
