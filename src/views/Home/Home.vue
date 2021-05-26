@@ -83,6 +83,14 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+
+    
+  },
+  mounted(){
+    const refresh = this.debounce(this.$refs.scroll.refresh,400)
+    this.$bus.$on('itemImageLoad',()=>{
+      refresh()
+    })
   },
   methods:{
     tabClick(index){
@@ -102,12 +110,22 @@ export default {
       this.$refs.scroll.Scroll(0,0,500)
     },
     contentPosition(position){
-      console.log(position)
       this.isShow = -position.y >1000
     },
     loadMore(){
       this.getHomeGoods(this.current)
       
+    },
+    debounce(fun,delay){
+      let timer = null
+      return function(...args){
+        if(timer){
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fun.apply(this,args)
+        }, delay);
+      }
     },
 
 
