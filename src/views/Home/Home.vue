@@ -87,7 +87,7 @@ export default {
     
   },
   mounted(){
-    const refresh = this.debounce(this.$refs.scroll.refresh,400)
+    const refresh = this.debounce(this.$refs.scroll.refresh,50)
     this.$bus.$on('itemImageLoad',()=>{
       refresh()
     })
