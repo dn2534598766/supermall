@@ -9,7 +9,7 @@
      :pull-up-load="true"
      @scroll="contentPosition"
      @pullingUp="loadMore">
-      <home-swiper :banner="banner" />
+      <home-swiper :banner="banner" @swiperLoad="swiperLoad" />
     <!-- <div>
      <el-carousel >
       <el-carousel-item v-for="item in banner" :key="item.link">
@@ -21,7 +21,7 @@
     </div> -->
       <recommend-view :recommend="recommend" />
       <feature-view />
-      <tab-control @tabClick="tabClick" :titles="['流行','新款','精选']"/>
+      <tab-control @tabClick="tabClick" :titles="['流行','新款','精选']" ref="tabControl" />
       <goods-list :goods="showGoods" />
     </scroll>
     <back-top @click.native="top" v-show="isShow" />
@@ -42,6 +42,7 @@ import BackTop from 'components/context/backTop/BackTop'
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
+import {debounce} from 'components/common/util/Debounce'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 
@@ -87,7 +88,7 @@ export default {
     
   },
   mounted(){
-    const refresh = this.debounce(this.$refs.scroll.refresh,50)
+    const refresh = debounce(this.$refs.scroll.refresh,50)
     this.$bus.$on('itemImageLoad',()=>{
       refresh()
     })
@@ -116,16 +117,8 @@ export default {
       this.getHomeGoods(this.current)
       
     },
-    debounce(fun,delay){
-      let timer = null
-      return function(...args){
-        if(timer){
-          clearTimeout(timer)
-        }
-        timer = setTimeout(() => {
-          fun.apply(this,args)
-        }, delay);
-      }
+    swiperLoad(){
+      console.log(this.$refs.tabControl.$el.offsetTop)
     },
 
 
@@ -158,7 +151,7 @@ export default {
 }
 .home-bar{
   position: fixed;
-  z-index: 9;
+  z-index: 9; 
   left: 0;
   top: 0;
   right: 0;
