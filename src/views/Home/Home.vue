@@ -74,7 +74,8 @@ export default {
       current:'pop',
       isShow:false,
       isTabControl:false,
-      offsetTop:0
+      offsetTop:0,
+      saveY:0
     }
   },
   computed:{
@@ -95,6 +96,15 @@ export default {
     this.$bus.$on('itemImageLoad',()=>{
       refresh()
     })
+  },
+  activated(){
+    this.$refs.scroll.refresh()
+    this.$refs.scroll.Scroll(0,this.saveY)
+    
+    
+  },
+  deactivated(){
+    this.saveY = this.$refs.scroll.scroll.y
   },
   methods:{
     tabClick(index){
@@ -127,6 +137,7 @@ export default {
       console.log(this.$refs.tabControl2.$el.offsetTop)
       this.offsetTop = this.$refs.tabControl2.$el.offsetTop
     },
+    
 
 
     getHomeGoods(type){
