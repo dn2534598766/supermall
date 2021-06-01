@@ -22,17 +22,8 @@
                         <span class="low" v-else>低</span>
                     </div>
                 </div>
-                
             </div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
-            <div>a</div>
+            <div class="entry">进店逛逛</div>
         </div>
     </div>
 </template>
@@ -133,4 +124,15 @@ export default {
 .green{
     color:green
 }
+.entry{
+    margin: 0 auto;
+    background-color: 	#F5F5F5;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 10%;
+    margin-top: 10px;
+}
+
 </style>

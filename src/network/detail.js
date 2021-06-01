@@ -31,3 +31,16 @@ export class Shop {
         this.goodsCount = shopInfo.cGoods;
     }
 }
+export class GoodsParam {
+    constructor(info,rule) {
+        // images可能没有值，所以要判断一下
+      this.image = info.images ? info.images[0] : '';
+      this.infos = info.set;
+      this.sizes = rule.tables
+    }
+}
+export function getRecommend() {
+    return request({
+        url: '/recommend'
+    })
+}

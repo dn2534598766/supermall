@@ -43,7 +43,7 @@ import BackTop from 'components/context/backTop/BackTop'
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
-import {debounce} from 'components/common/util/Debounce'
+import {debounce} from 'common/utils'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 
