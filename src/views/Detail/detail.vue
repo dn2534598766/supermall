@@ -9,6 +9,7 @@
         <detail-goods-info :detail-goods="GoodsInfo" @loadEnd="loadEnd"></detail-goods-info>
         <detail-param :params="paramInfo"></detail-param>
         <detail-comment-info :comment-info='commentInfo' ></detail-comment-info>
+        <goods-list :goods="getRecommend"></goods-list>
       </scroll>
   </div>
 </template>
@@ -24,6 +25,8 @@ import DetailParam from './ChildComps/DetailParam'
 import DetailCommentInfo from './ChildComps/DetailCommentInfo'
 
 import Scroll from 'components/common/scroll/Scroll'
+import GoodsList from 'components/context/goods/GoodsList'
+import {debounce} from 'common/utils'
 
 export default {
     name:'detail',
@@ -45,6 +48,12 @@ export default {
             this.getRecommend = res.data.list
         })
     },
+    mounted(){
+        const refresh = debounce(this.$refs.scroll.refresh,50)
+         this.$bus.$on('itemImageLoad',()=>{
+            refresh()
+        })
+    },
     data(){
         return {
             iid:null,
@@ -54,7 +63,7 @@ export default {
             GoodsInfo:{},
             paramInfo:{},
             commentInfo:{},
-            getRecommend:{}
+            getRecommend:[]
         }
     },
     methods:{
@@ -71,7 +80,8 @@ export default {
         Scroll,
         DetailGoodsInfo,
         DetailParam,
-        DetailCommentInfo
+        DetailCommentInfo,
+        GoodsList
     }
 }
 </script>
