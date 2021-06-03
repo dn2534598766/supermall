@@ -1,15 +1,15 @@
 <template>
   <div id="detail">
-      <detail-nav class="detail-nav"></detail-nav>
+      <detail-nav class="detail-nav" @navClick="navClick($event)"></detail-nav>
       <scroll class="content" ref="scroll">
         
         <detail-swiper :top-images="getSwiper"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
         <detail-shop-info :shop="shop"></detail-shop-info>
         <detail-goods-info :detail-goods="GoodsInfo" @loadEnd="loadEnd"></detail-goods-info>
-        <detail-param :params="paramInfo"></detail-param>
-        <detail-comment-info :comment-info='commentInfo' ></detail-comment-info>
-        <goods-list :goods="getRecommend"></goods-list>
+        <detail-param :params="paramInfo" ref="params"></detail-param>
+        <detail-comment-info :comment-info='commentInfo' ref="comment" ></detail-comment-info>
+        <goods-list :goods="getRecommend" ref="getRecommend"></goods-list>
       </scroll>
   </div>
 </template>
@@ -26,6 +26,7 @@ import DetailCommentInfo from './ChildComps/DetailCommentInfo'
 
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/context/goods/GoodsList'
+import {itemListenerMixin} from 'common/mixin'
 import {debounce} from 'common/utils'
 
 export default {
@@ -43,16 +44,26 @@ export default {
             if(data.rate.cRate !== 0){
                 this.commentInfo = data.rate.list[0]
             }
+            this.getScrollY = debounce(()=>{
+            this.navigation = []
+            this.navigation.push(0)
+            this.navigation.push(this.$refs.params.$el.offsetTop)
+            this.navigation.push(this.$refs.comment.$el.offsetTop)
+            this.navigation.push(this.$refs.getRecommend.$el.offsetTop)
+            console.log(this.navigation)
+            },200)
         })
         getRecommend().then(res=>{
             this.getRecommend = res.data.list
         })
+
+        
+        
     },
     mounted(){
-        const refresh = debounce(this.$refs.scroll.refresh,50)
-         this.$bus.$on('itemImageLoad',()=>{
-            refresh()
-        })
+    },
+    updated(){
+        
     },
     data(){
         return {
@@ -63,12 +74,21 @@ export default {
             GoodsInfo:{},
             paramInfo:{},
             commentInfo:{},
-            getRecommend:[]
+            getRecommend:[],
+            currentIndex:0,
+            navigation:[],
+            getScrollY:null
         }
     },
+    mixins:[itemListenerMixin],
     methods:{
         loadEnd(){
             this.$refs.scroll.refresh()
+            this.getScrollY()
+        },
+        navClick(index){
+            this.currentIndex = index
+            this.$refs.scroll.Scroll(0,-this.navigation[index],200)
         }
     },
     components:{

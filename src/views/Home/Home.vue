@@ -43,7 +43,7 @@ import BackTop from 'components/context/backTop/BackTop'
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
-import {debounce} from 'common/utils'
+import {itemListenerMixin} from 'common/mixin'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
 
@@ -60,7 +60,8 @@ export default {
     getHomeGoods,
     GoodsList,
     Scroll,
-    BackTop
+    BackTop,
+ 
   },
   data(){
     return {
@@ -75,9 +76,11 @@ export default {
       isShow:false,
       isTabControl:false,
       offsetTop:0,
-      saveY:0
+      saveY:0,
+
     }
   },
+  mixins:[itemListenerMixin],
   computed:{
     showGoods(){
       return this.goods[this.current].list
@@ -92,10 +95,7 @@ export default {
     
   },
   mounted(){
-    const refresh = debounce(this.$refs.scroll.refresh,50)
-    this.$bus.$on('itemImageLoad',()=>{
-      refresh()
-    })
+    
   },
   activated(){
     this.$refs.scroll.refresh()
@@ -105,6 +105,7 @@ export default {
   },
   deactivated(){
     this.saveY = this.$refs.scroll.scroll.y
+    this.$bus.$off('itemImageLoad',this.controlEvent)
   },
   methods:{
     tabClick(index){
