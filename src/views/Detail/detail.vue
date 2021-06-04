@@ -88,7 +88,7 @@ export default {
         },
         navClick(index){
             this.currentIndex = index
-            this.$refs.scroll.Scroll(0,-this.navigation[index],200)
+            this.$refs.scroll.Scroll(0,-this.navigation[index],200) 
         }
     },
     components:{
