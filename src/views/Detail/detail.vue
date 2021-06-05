@@ -1,7 +1,8 @@
 <template>
   <div id="detail">
-      <detail-nav class="detail-nav" @navClick="navClick($event)"></detail-nav>
-      <scroll class="content" ref="scroll">
+      <detail-nav class="detail-nav" @navClick="navClick($event)" ref="nav"></detail-nav>
+      <scroll class="content" ref="scroll" :probe-type="3" 
+      @scroll="scroll">
         
         <detail-swiper :top-images="getSwiper"></detail-swiper>
         <detail-base-info :goods="goods"></detail-base-info>
@@ -50,6 +51,7 @@ export default {
             this.navigation.push(this.$refs.params.$el.offsetTop)
             this.navigation.push(this.$refs.comment.$el.offsetTop)
             this.navigation.push(this.$refs.getRecommend.$el.offsetTop)
+            this.navigation.push(Number.MAX_VALUE)
             console.log(this.navigation)
             },200)
         })
@@ -77,7 +79,9 @@ export default {
             getRecommend:[],
             currentIndex:0,
             navigation:[],
-            getScrollY:null
+            getScrollY:null,
+            currentIndex:0,
+            position:0
         }
     },
     mixins:[itemListenerMixin],
@@ -89,6 +93,14 @@ export default {
         navClick(index){
             this.currentIndex = index
             this.$refs.scroll.Scroll(0,-this.navigation[index],200) 
+        },
+        scroll(position){
+            this.position = -position.y
+            for(let i = 0;i<this.navigation.length-1;i++){
+                if(this.position>=this.navigation[i]){
+                    this.$refs.nav.currentIndex = i
+                }
+            }
         }
     },
     components:{
