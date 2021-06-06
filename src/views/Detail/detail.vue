@@ -12,6 +12,8 @@
         <detail-comment-info :comment-info='commentInfo' ref="comment" ></detail-comment-info>
         <goods-list :goods="getRecommend" ref="getRecommend"></goods-list>
       </scroll>
+      <back-top @click.native="top" v-show="isShow" />
+      <detail-button-nav @addCart='addToCart'/>
   </div>
 </template>
 
@@ -24,10 +26,11 @@ import DetailShopInfo from './ChildComps/DetailShopInfo'
 import DetailGoodsInfo from './ChildComps/DetailGoodsInfo'
 import DetailParam from './ChildComps/DetailParam'
 import DetailCommentInfo from './ChildComps/DetailCommentInfo'
+import DetailButtonNav from './ChildComps/DetailButtonNav.vue'
 
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/context/goods/GoodsList'
-import {itemListenerMixin} from 'common/mixin'
+import {itemListenerMixin,Top} from 'common/mixin'
 import {debounce} from 'common/utils'
 
 export default {
@@ -84,7 +87,7 @@ export default {
             position:0
         }
     },
-    mixins:[itemListenerMixin],
+    mixins:[itemListenerMixin,Top],
     methods:{
         loadEnd(){
             this.$refs.scroll.refresh()
@@ -95,12 +98,28 @@ export default {
             this.$refs.scroll.Scroll(0,-this.navigation[index],200) 
         },
         scroll(position){
+            this.isShow = (-position.y) >1000
+            this.isTabControl = (-position.y) > this.offsetTop
             this.position = -position.y
             for(let i = 0;i<this.navigation.length-1;i++){
-                if(this.position>=this.navigation[i]){
+                if(this.position>=this.navigation[i] && this.position<this.navigation[i+1]){
                     this.$refs.nav.currentIndex = i
                 }
             }
+
+        },
+        addToCart () {
+            const product = {}
+            product.image = this.getSwiper[0]
+            // console.log(this.getSwiper[0])
+            product.title = this.goods.title
+            product.desc = this.goods.desc
+            product.price = this.goods.realPrice
+            product.iid = this.iid
+            console.log(product)
+
+            this.$store.dispatch('addCart',product)
+            console.log(this.$store.state.cartList)
         }
     },
     components:{
@@ -113,7 +132,8 @@ export default {
         DetailGoodsInfo,
         DetailParam,
         DetailCommentInfo,
-        GoodsList
+        GoodsList,
+        DetailButtonNav
     }
 }
 </script>
@@ -126,7 +146,7 @@ export default {
     background-color: white;
 }
 .content{
-    height: calc(100% - 44px);
+    height: calc(100% - 93px);
 }
 .detail-nav{
     position: relative;

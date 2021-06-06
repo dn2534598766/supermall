@@ -39,14 +39,13 @@ import FeatureView from './ChildComps/FeatureView'
 import TabControl from './ChildComps/TabControl'
 
 import GoodsList from 'components/context/goods/GoodsList'
-import BackTop from 'components/context/backTop/BackTop'
+
 
 import NavBar from 'components/common/navbar/NavBar'
 import Scroll from 'components/common/scroll/Scroll'
-import {itemListenerMixin} from 'common/mixin'
+import {itemListenerMixin,Top} from 'common/mixin'
 
 import {getHomeMultidata,getHomeGoods} from 'network/home'
-
 
 
 export default {
@@ -59,8 +58,7 @@ export default {
     TabControl,
     getHomeGoods,
     GoodsList,
-    Scroll,
-    BackTop,
+    Scroll
  
   },
   data(){
@@ -73,14 +71,13 @@ export default {
          'sell': {page: 0, list:[]}
       },
       current:'pop',
-      isShow:false,
-      isTabControl:false,
+      
       offsetTop:0,
       saveY:0,
 
     }
   },
-  mixins:[itemListenerMixin],
+  mixins:[itemListenerMixin,Top],
   computed:{
     showGoods(){
       return this.goods[this.current].list
@@ -123,9 +120,7 @@ export default {
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
     },
-    top(){
-      this.$refs.scroll.Scroll(0,0,500)
-    },
+    
     contentPosition(position){
       this.isShow = (-position.y) >1000
       this.isTabControl = (-position.y) > this.offsetTop
