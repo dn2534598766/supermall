@@ -1,15 +1,13 @@
 <template>
-  <div class="category">
-    
+  <div class="">
+
   </div>
 </template>
 
 <script>
 
-
 export default {
-  name:"category",
-  
+    name:'CartListItem',
 }
 </script>
 

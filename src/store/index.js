@@ -1,29 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
 
 Vue.use(Vuex)
-
+const state ={
+    cartList:[]
+}
 const store = new Vuex.Store({
-    state:{
-        cartList:[]
-    },
-    mutations:{
-        
-    },
-    actions:{
-        addCart(context,product){
-            let result = null
-            result = context.state.cartList.find(function(item){
-                return item.iid === product.iid
-            })
-            if(result){
-                result.count += 1
-            }else{
-                product.count = 1
-                context.state.cartList.push(product)
-            }
-        }
-    }
+    state,
+    mutations,
+    actions,
+    getters
 })
 
 export default store
