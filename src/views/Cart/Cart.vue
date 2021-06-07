@@ -6,6 +6,7 @@
     <scroll class="content">
       <cart-list :goods="cartList"/>
     </scroll>
+    <cart-bottom />
   </div>
 </template>
 
@@ -14,13 +15,15 @@ import NavBar from 'components/common/navbar/NavBar'
 import {mapGetters} from 'vuex'
 import CartList from './ChildComps/CartList.vue'
 import Scroll from 'components/common/scroll/Scroll'
+import CartBottom from './ChildComps/CartBottom'
 
 export default {
     name:'Cart',
     components:{
       NavBar,
       CartList,
-      Scroll
+      Scroll,
+      CartBottom
     },
     computed:{
       ...mapGetters(['getLength','cartList'])
@@ -33,16 +36,13 @@ export default {
   height: 44px;
   background-color: var(--color-tint);
   color: white;
+  z-index: 10000;
 }
 /* .cart{
   height: 100%;
 } */
 .content{
+  height: calc(100vh - 44px - 49px - 40px);
   overflow: hidden;
-  position: absolute;
-  top: 44px;
-  bottom: 49px;
-  right: 0;
-  left: 0;
 }
 </style>
