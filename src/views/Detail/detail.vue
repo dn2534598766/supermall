@@ -118,7 +118,9 @@ export default {
             product.iid = this.iid
             console.log(product)
 
-            this.$store.dispatch('addCart',product)
+            this.$store.dispatch('addCart',product).then(res=>{
+                console.log(res)
+            })
             console.log(this.$store.state.cartList)
         }
     },

@@ -19,13 +19,13 @@ export default {
 </script>
 
 <style scoped>
-.check-btn {
+.check-btn img{
     width: 20px;
     height: 20px;
     border-radius: 50%;
     border: 2px solid #aaa;
 }
-.check{
+.check img{
     background-color: red;
     border-color: pink;
 }
