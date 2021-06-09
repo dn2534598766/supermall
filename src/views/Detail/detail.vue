@@ -14,6 +14,7 @@
       </scroll>
       <back-top @click.native="top" v-show="isShow" />
       <detail-button-nav @addCart='addToCart'/>
+      <toast message="哈哈哈"/>
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/context/goods/GoodsList'
 import {itemListenerMixin,Top} from 'common/mixin'
 import {debounce} from 'common/utils'
+import Toast from 'components/common/Toast/Toast'
 
 export default {
     name:'detail',
@@ -135,7 +137,8 @@ export default {
         DetailParam,
         DetailCommentInfo,
         GoodsList,
-        DetailButtonNav
+        DetailButtonNav,
+        Toast
     }
 }
 </script>
