@@ -14,7 +14,7 @@
       </scroll>
       <back-top @click.native="top" v-show="isShow" />
       <detail-button-nav @addCart='addToCart'/>
-      <toast message="哈哈哈"/>
+      <!-- <toast :message="7"/> -->
   </div>
 </template>
 
@@ -121,7 +121,7 @@ export default {
             console.log(product)
 
             this.$store.dispatch('addCart',product).then(res=>{
-                console.log(res)
+                this.$toast.show(res,1000)
             })
             console.log(this.$store.state.cartList)
         }

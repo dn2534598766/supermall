@@ -1,5 +1,5 @@
 <template>
-  <div class="Toast">
+  <div class="Toast" v-show="isShow">
       <div>{{message}}</div>
   </div>
 </template>
@@ -12,7 +12,23 @@ export default {
             type:String,
             default:''
         }
+    },
+    data(){
+        return {
+            isShow:false,
+            message:''
+        }
+    },
+    methods: {
+    show(message='添加至购物车',duration=1000) {
+      this.message = message
+      this.isShow = true
+      setTimeout(() => {
+        this.message = ''
+        this.isShow =false
+      },duration)
     }
+  }
 }
 </script>
 
@@ -21,12 +37,13 @@ export default {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 100px;
+    width: 180px;
     height: 60px;
     background: rgba(0,0,0,.6);
     color: white;
     transform: translate(-50%,-50%);
     text-align: center;
-    line-height: 60px; 
+    line-height: 60px;  
+    z-index: 1000;
 }
 </style>
