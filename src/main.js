@@ -14,7 +14,7 @@ import VueLazyLoad from 'vue-lazyload'
 FastClick.attach(document.body)
 Vue.use(Toast)
 Vue.use(VueLazyLoad,{
-  loading:require('./assets/img/common/placeholder.png')
+  loading:require('./assets/img/common/loading.gif')
 })
 Vue.config.productionTip = false
 Vue.prototype.$bus = new Vue()
