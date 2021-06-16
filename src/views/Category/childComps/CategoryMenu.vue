@@ -37,8 +37,6 @@ export default {
 
 <style scoped>
 .content {
-  /* height: calc(100vh - 44px - 49px); */
-  /* overflow: hidden; */
     background: #f6f6f6;
     height: 100%;
     width: 100px;
@@ -54,7 +52,6 @@ export default {
 }
 .title {
     line-height: 45px;
-    /* text-align: center; */
     font-size: 14px;
     background: #f6f6f6;
 }
