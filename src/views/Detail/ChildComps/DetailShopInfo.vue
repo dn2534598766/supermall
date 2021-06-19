@@ -1,7 +1,7 @@
 <template>
     <div class="detail-shop-info">
         <div class="business">
-            <img class="logo" :src="shop.logo"  alt="" />
+            <img class="logo" :src="prefix+shop.logo"  alt="" />
             <span class="name">{{shop.name}}</span>
             <div class="describe">
                 <div class="btn1">
@@ -38,7 +38,12 @@ export default {
                 return {}
             }
         }
-    }
+    },
+    data(){
+        return {
+            prefix:'http:'
+        }
+    },
 }
 </script>
 

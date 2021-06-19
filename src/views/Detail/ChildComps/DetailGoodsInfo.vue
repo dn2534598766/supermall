@@ -7,7 +7,7 @@
             <div class="effect">{{detailGoods.detailImage[0].key}}</div>
        </div>
        <div class="info-list" v-for="(item,index) in detailGoods.detailImage[0].list" :key="index">
-           <img :src="item" alt="" @load="goodsLoad" />
+           <img :src="prefix+item" alt="" @load="goodsLoad" />
        </div>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
     data(){
         return {
             count:0,
-            imageLength:0
+            imageLength:0,
+            prefix:'http:'
         }
     },
     methods:{

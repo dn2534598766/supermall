@@ -41,7 +41,9 @@ export default {
         this.iid = this.$route.params.iid  
         getDetail(this.iid).then(res=>{
             console.log(res)
+            
             const data = res.result
+            console.log(data.itemInfo.topImages)
             this.getSwiper = data.itemInfo.topImages
             this.goods = new Goods(data.columns,data.itemInfo,data.shopInfo.services)
             this.shop = new Shop(data.shopInfo)

@@ -2,7 +2,7 @@
     <swiper class="detail-swiper" >
             <swiper-item
             v-for="(item,index) in topImages" :key="index">
-                <img :src="item" alt="">
+                <img :src="prefix+item" alt="">
             </swiper-item>
         </swiper>
 </template>
@@ -15,6 +15,11 @@ export default {
     components:{
         Swiper,
         SwiperItem
+    },
+    data(){
+        return {
+            prefix:'http:'
+        }
     },
     props:{
         topImages:{

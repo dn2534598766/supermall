@@ -4,7 +4,7 @@
             <check-btn @click.native="checkClick" :is-check='goods.checked'></check-btn>
         </div>
        <div class="item-img">
-           <img :src="goods.image" alt="商品图片">
+           <img :src="prefix+goods.image" alt="商品图片">
        </div>
        <div class="item-info">
            <div class="item-title">{{goods.title}}</div>
@@ -27,6 +27,11 @@ export default {
             default(){
                 return {}
             }
+        }
+    },
+    data(){
+        return {
+            prefix:'http:'
         }
     },
     components:{

@@ -58,6 +58,7 @@ export default {
     height: 50px;
     line-height: 50px;
     border-bottom: 1px solid rgba(0,0,0,.1);
+    margin-bottom: 10px;
 }
 .header-title{
     float: left;

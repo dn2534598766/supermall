@@ -36,7 +36,9 @@ export default {
 .bottom-bar {
     background: #fff;
     height: 49px;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     z-index: 9;
     display: flex;
     text-align: center;
