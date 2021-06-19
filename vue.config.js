@@ -1,3 +1,5 @@
+var path = require('path')
+
 module.exports = {
     configureWebpack: {
         resolve: {
@@ -9,5 +11,6 @@ module.exports = {
                 'views': '@/views'
             }
         }
-    }
+    },
+    publicPath: '' 
 }
