@@ -4,7 +4,7 @@ import router from './router/index'
 import store from './store'
 
 import Toast from 'components/common/Toast'
-
+ 
 import FastClick from 'fastclick'
 import VueLazyLoad from 'vue-lazyload'
 // import ElementUI from 'element-ui'
