@@ -1,6 +1,6 @@
 <template>
     <div>
-        <grid-view 
+      <grid-view 
       :cols='3' 
       :lineSpace='15' 
       :v-margin='20'

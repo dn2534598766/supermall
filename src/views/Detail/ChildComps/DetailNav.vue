@@ -1,7 +1,7 @@
 <template>
     <nav-bar>
         <div slot="left" class="left" @click="back">
-            <img src="~assets/img/common/back.svg" alt="" />
+            <img src="~assets/img/common/back.png" alt="" />
         </div>
         <div slot="center" class="center">
                 <span v-for="(item,index) in title" :key="index"

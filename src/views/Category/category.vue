@@ -70,9 +70,7 @@ methods: {
   _getCategory(){
     getCategory().then(res => {
     console.log(res);
-    // 1.获取分类数据
     this.categories = res.data.category.list
-    // 2.初始化每个类别的子数据
     for(let i=0; i<this.categories.length; i++) {
       this.categoryData[i] = {
         subcategories: {},

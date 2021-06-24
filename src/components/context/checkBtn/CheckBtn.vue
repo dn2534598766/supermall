@@ -1,6 +1,6 @@
 <template>
     <div class="check-btn" :class="{check:isCheck}">
-        <img src="~assets/img/cart/tick.svg" alt="" />
+        <img src="~assets/img/cart/tick.svg" />
     </div>
 </template>
 
