@@ -6,4 +6,4 @@ export default {
         product.checked = true
         state.cartList.push(product)
     }
-} 
+}  
